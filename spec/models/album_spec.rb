@@ -9,4 +9,15 @@ describe Album do
   # end
   # これの代わりにshoulda_matchersで
   it { should have_many(:songs) }
+
+  it { should validate_presence_of :name}
+
+  it { should validate_length_of(:name).is_at_most(100)}
+
+  describe Album do
+    it("titleizes the name of an album") do
+      album = Album.create({name: "giant steps", genre: "jazz"})
+      expect(album.name()).to(eq("Giant Steps"))
+    end
+  end
 end
